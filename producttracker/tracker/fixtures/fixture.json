@@ -1,0 +1,30 @@
+[
+{
+ "model": "tracker.product",
+ "pk": 1,
+ "fields": {
+  "description": "Cesna 120"
+ }
+},
+{
+ "model": "tracker.product",
+ "pk": 2,
+ "fields": {
+  "description": "DC-6 Twin Otter"
+ }
+},
+{
+ "model": "tracker.product",
+ "pk": 3,
+ "fields": {
+  "description": "Piper M600"
+ }
+},
+{
+ "model": "tracker.product",
+ "pk": 4,
+ "fields": {
+  "description": "Art Boom 6500"
+ }
+}
+]
