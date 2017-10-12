@@ -1,0 +1,13 @@
+<h1>Product Tracker</h1>
+<h4>Products</h4>
+<ul>
+{% for product in products %}
+    <li>{{ product.description }}</li>
+{% endfor %}
+</ul>
+<h4>Location History</h4>
+<ul>
+{% for breadcrumb in breadcrumbs %}
+    <li>{{ breadcrumb }}</li>
+{% endfor %}
+</ul>
