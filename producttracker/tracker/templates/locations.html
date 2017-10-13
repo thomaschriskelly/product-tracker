@@ -3,12 +3,14 @@
 {% endblock %}
 {% block content %}
 <a href='/'>Back</a> &gt;&gt; {{ product }}
+<br>
+<br>
 <table>
     <tr>
-        <th>datetime</th>
-        <th>longitude</th>
-        <th>latitude</th>
-        <th>elevation</th>
+        <th>Datetime</th>
+        <th>Longitude</th>
+        <th>Latitude</th>
+        <th>Elevation</th>
     </tr>
 {% for breadcrumb in breadcrumbs %}
     <tr>
@@ -30,6 +32,9 @@ Add a new location
 <style>
 table{
     width: 100%;
+}
+th{
+    text-align: left;
 }
 </style>
 {% endblock %}
