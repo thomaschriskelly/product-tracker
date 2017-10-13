@@ -7,4 +7,3 @@ def index(request):
         'breadcrumbs': models.Breadcrumb.objects.all(),
     }
     return render(request, 'index.html', context)
-

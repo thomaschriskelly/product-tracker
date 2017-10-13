@@ -1,13 +1,15 @@
-<h1>Product Tracker</h1>
+{% extends 'base.html' %}
+{% block content %}
 <h4>Products</h4>
 <ul>
 {% for product in products %}
-    <li>{{ product.description }}</li>
+    <li><a href=''>{{ product.description }}</a></li>
 {% endfor %}
 </ul>
-<h4>Location History</h4>
-<ul>
-{% for breadcrumb in breadcrumbs %}
-    <li>{{ breadcrumb }}</li>
-{% endfor %}
-</ul>
+<form>
+    Add a new product:
+    <br>
+    <input type='text' name='description'>
+    <input type="submit" value='Submit'>
+</form>
+{% endblock %}
