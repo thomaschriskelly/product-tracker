@@ -22,11 +22,15 @@
 {% endfor %}
 </table>
 <br>
+<hr>
+<br>
 Add a new location
 <br>
-<form action='/location/' method='post'>
+<form action='{% url 'location' %}' method='post'>
     {% csrf_token %}
-    {{ location_form }}
+    <table>
+        {{ location_form.as_table }}
+    </table>
     <input type="submit" value='Submit'>
 </form>
 <style>

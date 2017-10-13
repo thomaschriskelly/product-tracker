@@ -6,11 +6,14 @@ Choose a product
     <li><a href='{% url 'locations' product.id %}'>{{ product.description }}</a></li>
 {% endfor %}
 </ul>
+<br>
+<hr>
+<br>
 Add a new product
 <br>
-<form action='/product/' method='post'>
+<form action='{% url 'product' %}' method='post'>
     {% csrf_token %}
-    {{ product_form }}
+    {{ product_form.as_p }}
     <input type="submit" value='Submit'>
 </form>
 {% endblock %}
