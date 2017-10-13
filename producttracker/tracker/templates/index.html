@@ -1,15 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h4>Products</h4>
+Choose a product
 <ul>
 {% for product in products %}
-    <li><a href=''>{{ product.description }}</a></li>
+    <li><a href='{% url 'locations' product.id %}'>{{ product.description }}</a></li>
 {% endfor %}
 </ul>
-<form>
-    Add a new product:
-    <br>
-    <input type='text' name='description'>
+Add a new product
+<br>
+<form action='/product/' method='post'>
+    {% csrf_token %}
+    {{ product_form }}
     <input type="submit" value='Submit'>
 </form>
 {% endblock %}

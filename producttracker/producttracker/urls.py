@@ -20,4 +20,6 @@ from tracker import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
+    url(r'^products/$', views.product, name='product'),
+    url(r'^products/(?P<product_id>[0-9]+)/locations/$', views.locations, name='locations'),
 ]
