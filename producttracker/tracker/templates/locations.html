@@ -14,7 +14,7 @@
         <th></th>
     </tr>
 {% for breadcrumb in breadcrumbs %}
-<tr class='locationRow' data-datetime='{{ breadcrumb.datetime }}'>
+<tr class='locationRow' data-datetime='{{ breadcrumb.datetime.isoformat }}'>
         <td>{{ breadcrumb.datetime }}</td>
         <td>{{ breadcrumb.longitude }}</td>
         <td>{{ breadcrumb.latitude }}</td>
@@ -24,9 +24,9 @@
 {% endfor %}
 </table>
 <br>
-Filter between datetimes
-<input type='datetime-local' id='startDate'>
-<input type='datetime-local' id='endDate'>
+Filter between datetimes (eg: 2016-10-13 14:30:59)
+<input type='text' id='startDate'>
+<input type='text' id='endDate'>
 <input type='submit' value='Filter' id='filter'>
 <br>
 <hr>
@@ -74,8 +74,17 @@ tr:hover{
         let startDate = new Date(document.getElementById('startDate').value);
         let endDate = new Date(document.getElementById('endDate').value);
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())){
-            alert('Invalid date range!');
+            alert('Invalid date: ' + document.getElementById('startDate').value);
             return;
+        }
+        let locationRows = document.getElementsByClassName('locationRow');
+        for ( let row of locationRows ){
+            let rowDateTime = new Date(row.dataset.datetime);
+            if (rowDateTime < startDate || rowDateTime > endDate){
+                row.style.display='none';
+            } else {
+                row.style.display='table-row';
+            }
         }
     };
 </script>
