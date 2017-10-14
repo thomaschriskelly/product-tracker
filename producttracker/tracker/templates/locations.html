@@ -24,6 +24,10 @@
 {% endfor %}
 </table>
 <br>
+Filter between datetimes
+<input type="datetime-local" id='startDate'>
+<input type="datetime-local" id='endDate'>
+<br>
 <hr>
 <br>
 Add a new location
@@ -64,5 +68,9 @@ tr:hover{
             .catch(err => console.log(err));
         };
     }
+
+    document.getElementById('startDate').addEventListener('change', function(){
+        alert();
+    })
 </script>
 {% endblock %}
