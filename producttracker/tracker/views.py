@@ -31,7 +31,7 @@ def locations(request, product_id):
         form = forms.LocationForm(request.POST)
         if form.is_valid():
             models.Breadcrumb.objects.create(product=models.Product.objects.get(id=product_id), **form.cleaned_data)
-            redirect_url = reverse('locations', args=(product_id))
+            redirect_url = reverse('locations', args=(product_id,))
             return HttpResponseRedirect(redirect_url)
 
 def location(request, location_id):
