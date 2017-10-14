@@ -40,3 +40,9 @@ def location(request, location_id):
         redirect_url = reverse('locations', args=(to_delete.product.id,))
         to_delete.delete()
         return HttpResponse('Success')
+
+def export(request):
+    context = {
+        'breadcrumbs': models.Breadcrumb.objects.all()
+    }
+    return render(request, 'export.txt', context)
