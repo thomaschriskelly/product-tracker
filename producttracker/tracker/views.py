@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from . import models
 from . import forms
@@ -19,18 +19,24 @@ def product(request):
             return HttpResponseRedirect('/')
 
 def locations(request, product_id):
-    product = models.Product.objects.get(id=product_id)
-    context = {
-        'product': product,
-        'breadcrumbs': models.Breadcrumb.objects.filter(product=product),
-        'location_form': forms.LocationForm(),
-    }
-    return render(request, 'locations.html', context)
-
-def location(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        product = models.Product.objects.get(id=product_id)
+        context = {
+            'product': product,
+            'breadcrumbs': models.Breadcrumb.objects.filter(product=product),
+            'location_form': forms.LocationForm(),
+        }
+        return render(request, 'locations.html', context)
+    elif request.method == 'POST':
         form = forms.LocationForm(request.POST)
         if form.is_valid():
             models.Breadcrumb.objects.create(**form.cleaned_data)
             redirect_url = reverse('locations', args=(form.cleaned_data['product'].id,))
             return HttpResponseRedirect(redirect_url)
+
+def location(request, location_id):
+    if request.method == 'DELETE':
+        to_delete = models.Breadcrumb.objects.get(id=location_id)
+        redirect_url = reverse('locations', args=(to_delete.product.id,))
+        to_delete.delete()
+        return HttpResponse('Success')

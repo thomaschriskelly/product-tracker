@@ -19,7 +19,7 @@
         <td>{{ breadcrumb.longitude }}</td>
         <td>{{ breadcrumb.latitude }}</td>
         <td>{{ breadcrumb.elevation }}</td>
-        <td class='delete'>&#x2717;</td>
+        <td class='delete' data-url='{% url 'location' breadcrumb.id %}'>&#x2717;</td>
     </tr>
 {% endfor %}
 </table>
@@ -28,7 +28,7 @@
 <br>
 Add a new location
 <br>
-<form action='{% url 'location' %}' method='post'>
+<form action='{% url 'locations' product.id %}' method='post'>
     {% csrf_token %}
     <table>
         {{ location_form.as_table }}
@@ -47,6 +47,22 @@ tr:hover{
 }
 .delete:hover{
     color: red;
+    cursor: pointer;
 }
 </style>
+<script>
+    let deleteButtons = document.getElementsByClassName('delete');
+    let headers = {"X-CSRFToken": '{{ csrf_token }}'};
+    let fetchOptions = {method: 'DELETE', credentials: 'same-origin', headers: headers};
+    for ( let btn of deleteButtons ) {
+        btn.onclick = function() {
+            fetch(btn.dataset.url, fetchOptions)
+            .then(res => {
+                console.log(res);
+                btn.parentNode.remove()
+            })
+            .catch(err => console.log(err));
+        };
+    }
+</script>
 {% endblock %}
